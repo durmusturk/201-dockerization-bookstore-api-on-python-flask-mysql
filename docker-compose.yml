@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  database:
+    image: mysql:latest
+    environment: 
+      - MYSQL_ROOT_PASSWORD: P030216021p
+      - MYSQL_DATABASE: bookstore_db
+      - MYSQL_USER: clarusway
+      - MYSQL_PASSWORD: Clarusway_1
+    networks:
+      - bookstore-web
+  my-app:
+    build: .
+    restart: always
+    depends_on:
+      - database
+    networks:
+      - bookstore-web
+    ports:
+      - "80:80"
+networks:
+  bookstore-web:
+    driver: bridge
